@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+    --primary-font: 'Poppins', sans-serif;
+    --secondary-font: 'Playfair Display', serif;
+
+    /* Primary Colors */
+    --primary-color: rgb(33 100 135);
+    --on-primary-color: rgb(255 255 255);
+    --primary-container-color: rgb(199 231 255);
+    --on-primary-container-color: rgb(0 76 108);
+
+    /* Secondary Colors */
+    --secondary-color: rgb(79 97 110);
+    --on-secondary-color: rgb(255 255 255);
+    --secondary-container-color: rgb(210 229 245);
+    --on-secondary-container-color: rgb(55 73 85);
+
+    /* Error Colors */
+    --error-color: rgb(186 26 26);
+    --on-error-color: rgb(255 255 255);
+    --background-color: #f8f9fa;
+    --on-background-color: #212529;
+    --surface-color: #ffffff;
+}
+
+/* Base Styles */
+body {
+    font-family: var(--primary-font);
+    color: var(--on-background-color);
+    background-color: var(--background-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Typography hierarchy */
+h1,
+h2,
+h3,
+h4,
+.display-text {
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    color: var(--on-background-color);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p,
+li,
+a,
+button,
+input,
+label {
+    font-family: var(--primary-font);
+}
+
+/* Override Bootstrap Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
+    border-color: color-mix(in srgb, var(--primary-color), white 15%);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--secondary-color), white 15%);
+    border-color: color-mix(in srgb, var(--secondary-color), white 15%);
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: none;
+}
+
+.button:hover {
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
+}
+
+.error-message {
+    color: var(--error-color);
+    background-color: var(--error-container-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+/* Homepage layout design */
+/* Header Section */
+.header-section {
+    background: linear-gradient(180deg, #f8f9fa, #e9ecef);
+}
+
+.language-btn {
+    background-color: var(--secondary-container-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-secondary-container-color);
+    transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+    background-color: color-mix(in srgb, var(--secondary-container-color), white 10%);
+    transform: scale(1.05);
+}
+
+.article-count {
+    display: block;
+    font-size: 12px;
+    color: var(--on-secondary-container-color);
+}
+
+.logo-container {
+    background: linear-gradient(180deg, #ffffff, #f8f9fa);
+}
+
+.logo {
+    max-width: 120px;
+}
+
+/* University List Section */
+.resource-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--surface-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.resource-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.dropdown-item i {
+    color: var(--secondary-color);
+    vertical-align: middle;
+}
+
+.dropdown-item:hover i {
+    color: var(--primary-color);
+}
+
+/* Search Bar */
+.search-container {
+    transition: all 0.3s ease;
+}
+
+.search-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+    border: none;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* Ticker Styles */
+.ticker {
+    overflow-x: hidden;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+    background-color: var(--surface-color);
+}
+.ticker-inner {
+    display: inline-block;
+    /* slower scroll animation */
+    animation: scroll-left 40s linear infinite;
+}
+.ticker-item {
+    display: inline-block;
+    margin: 0 2rem;
+    font-size: 1rem;
+    color: var(--secondary-color);
+}
+@keyframes scroll-left {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Sticky University Category Banner */
+.university-type-banner {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+.back-to-top.show {
+    display: flex;
+}

@@ -1,0 +1,16 @@
+/* Search Bar */
+@media (max-width: 576px) {
+    .search-container {
+        flex-direction: column;
+        border-radius: 50px;
+    }
+
+    .search-btn {
+        margin: 0.5rem 0 !important;
+        border-radius: 50px !important;
+    }
+
+    .input-group-text {
+        border-radius: 50px 0 0 50px !important;
+    }
+}
