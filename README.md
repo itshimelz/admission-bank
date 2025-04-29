@@ -13,7 +13,7 @@ A web application to explore university admissions in Bangladesh.
 
 1. Clone the repo:
    ```bash
-   git clone <repo_url>
+   git clone https://github.com/itshimelz/admission-bank.git
    cd admission-bank
    ```
 2. Open `index.html` in your browser.

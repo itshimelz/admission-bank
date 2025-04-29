@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function renderGrid(list) {
+        const resourceGrid = document.getElementById('resourceGrid');
         resourceGrid.innerHTML = '';
         if (list.length === 0) {
             resourceGrid.innerHTML = '<p class="text-center">No results found.</p>';
@@ -35,12 +36,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         list.forEach(u => {
             const col = document.createElement('div');
-            col.className = 'col-md-5 col-lg-5 resource-item text-center mb-4 me-4';
-            col.innerHTML = `
-                <i class="bi bi-${u.icon} fs-1 mb-2"></i>
-                <h5>${u.name}</h5>
-                <p><a href="http://${u.website}" target="_blank">${u.website}</a> - ${u.type}</p>
-            `;
+            col.className = 'col-md-6 col-lg-4 mb-4';
+    
+            const card = document.createElement('div');
+            card.className = 'card h-100 shadow-sm'; // Added shadow for better visual lift
+            card.style.backgroundColor = 'var(--surface-color)';
+            card.style.color = 'var(--on-surface-color)'; // Assuming you might want this
+    
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body text-center';
+    
+            const icon = document.createElement('i');
+            icon.className = `bi bi-${u.icon} fs-1 mb-2`;
+            icon.style.color = 'var(--primary-color)'; // Highlight the icon with primary color
+    
+            const title = document.createElement('h5');
+            title.className = 'card-title';
+            title.style.color = 'var(--secondary-color)'; // Use secondary color for the title
+            title.textContent = u.name;
+    
+            const details = document.createElement('p');
+            details.className = 'card-text';
+            details.style.color = 'var(--on-background-color)'; // Use on-background for general text
+            details.textContent = `${u.website} - ${u.type}`;
+    
+            const link = document.createElement('a');
+            link.href = `university.html?name=${encodeURIComponent(u.name)}`;
+            link.className = 'stretched-link';
+    
+            cardBody.appendChild(icon);
+            cardBody.appendChild(title);
+            cardBody.appendChild(details);
+    
+            card.appendChild(cardBody);
+            card.appendChild(link);
+            col.appendChild(card);
             resourceGrid.appendChild(col);
         });
     }

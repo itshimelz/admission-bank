@@ -217,6 +217,7 @@ label {
     position: sticky;
     top: 0;
     z-index: 1000;
+    background-color: var(--surface-color);
 }
 
 /* Back to Top Button */
