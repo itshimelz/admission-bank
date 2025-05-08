@@ -4,17 +4,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University Details</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+  <title>University Details - Admission Bank</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/media.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./css/university.css">
 </head>
 <body>
+  <div class="university-header">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html" class="text-white">Home</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page" id="universityName">University Details</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
   <main class="container py-5">
-    <a href="index.html" class="btn btn-secondary mb-4"><i class="bi bi-arrow-left me-1"></i>Back to list</a>
-    <div id="uni-details" class="uni-details"></div>
+    <div id="university-details">
+      <div class="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
   </main>
-  <script src="./js/details.js" defer></script>
+
+  <a href="#top" class="back-button" id="backToTopBtn" title="Back to Top">
+    <i class="bi bi-arrow-up"></i>
+    <span class="visually-hidden">Back to Top</span>
+  </a>
+
+  <script src="./js/university.js"></script>
 </body>
 </html>

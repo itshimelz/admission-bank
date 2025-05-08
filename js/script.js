@@ -8,18 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let allUnis = [];
     let currentType = 'All';
 
-    // Load JSON data
+    // Load JSON data for main page
     Promise.all([
         fetch('./data/public_universities.json').then(res => res.json()),
         fetch('./data/private_universities.json').then(res => res.json())
     ])
     .then(([publicData, privateData]) => {
-        const pub = publicData.map(u => ({ name: u.name, website: u.website || '', type: 'Public', icon: 'building' }));
-        const priv = privateData.map(u => ({ name: u.name, website: u.website || '', type: 'Private', icon: 'shield' }));
+        const pub = publicData.map(u => ({ 
+            name: u.name, 
+            website: u.website || '', 
+            type: 'Public', 
+            icon: 'building' 
+        }));
+        const priv = privateData.map(u => ({ 
+            name: u.name, 
+            website: u.website || '', 
+            type: 'Private', 
+            icon: 'shield' 
+        }));
         allUnis = [...pub, ...priv];
         console.log(`Loaded universities: ${allUnis.length}`, allUnis);
         renderGrid(allUnis);
-        // populate the university ticker
         populateTicker();
     })
     .catch(err => {
@@ -39,25 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
             col.className = 'col-md-6 col-lg-4 mb-4';
     
             const card = document.createElement('div');
-            card.className = 'card h-100 shadow-sm'; // Added shadow for better visual lift
+            card.className = 'card h-100 shadow-sm';
             card.style.backgroundColor = 'var(--surface-color)';
-            card.style.color = 'var(--on-surface-color)'; // Assuming you might want this
+            card.style.color = 'var(--on-surface-color)';
     
             const cardBody = document.createElement('div');
             cardBody.className = 'card-body text-center';
     
             const icon = document.createElement('i');
             icon.className = `bi bi-${u.icon} fs-1 mb-2`;
-            icon.style.color = 'var(--primary-color)'; // Highlight the icon with primary color
+            icon.style.color = 'var(--primary-color)';
     
             const title = document.createElement('h5');
             title.className = 'card-title';
-            title.style.color = 'var(--secondary-color)'; // Use secondary color for the title
+            title.style.color = 'var(--secondary-color)';
             title.textContent = u.name;
     
             const details = document.createElement('p');
             details.className = 'card-text';
-            details.style.color = 'var(--on-background-color)'; // Use on-background for general text
+            details.style.color = 'var(--on-background-color)';
             details.textContent = `${u.website} - ${u.type}`;
     
             const link = document.createElement('a');
@@ -91,14 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGrid(filtered);
     }
 
-    // initialize and fill the ticker with university names
     function populateTicker() {
         const ticker = document.querySelector('.ticker');
         if (!ticker) return;
         ticker.innerHTML = '';
         const inner = document.createElement('div');
         inner.className = 'ticker-inner';
-        // limit to first 10 names and style as buttons
         allUnis.slice(0, 10).forEach(u => {
             const btn = document.createElement('button');
             btn.type = 'button';
@@ -107,12 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
             inner.appendChild(btn);
         });
         ticker.appendChild(inner);
-        // update badge with number of listed upcoming admissions
         const countEl = document.getElementById('admission-count');
         if (countEl) countEl.textContent = inner.children.length;
     }
 
-    // initialize dropdown button label based on currentType
     dropdownToggle.textContent = 'All Universities';
 
     dropdownItems.forEach(item => {
@@ -121,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentType = item.getAttribute('data-type');
             dropdownItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
-            // update dropdown button to show current selection
             dropdownToggle.textContent = currentType === 'All' ? 'All Universities' : `${currentType} Universities`;
             applyFilters();
         });

@@ -1,0 +1,305 @@
+.university-header {
+    background: linear-gradient(rgba(33, 100, 135, 0.9), rgba(33, 100, 135, 0.9)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--on-primary-color);
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+}
+
+/* .university-hero {
+    background: var(--surface-color);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(60, 72, 88, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--surface-color);
+
+} */
+
+.university-logo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    padding: 1rem;
+    /* background: var(--surface-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; */
+}
+
+/* .university-logo:hover {
+    transform: scale(1.05);
+} */
+
+.info-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px rgba(60, 72, 88, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--surface-color);
+    /* height: 100%; */
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-card .card-header {
+    background: var(--background-color);
+    border-bottom: none;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+    color: var(--on-background-color);
+}
+
+.info-card .card-body {
+    padding: 1.5rem;
+    color: var(--on-background-color);
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 50px;
+}
+
+.badge-primary {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.badge-secondary {
+    background-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+}
+
+.contact-info {
+    color: var(--on-surface-color);
+}
+
+.contact-info i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: color-mix(in srgb, var(--primary-color), white 15%);
+}
+
+.program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.program-item {
+    padding: 0.75rem;
+    background: var(--background-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.program-item:hover {
+    transform: translateX(5px);
+}
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+}
+
+.facility-item {
+    padding: 0.5rem;
+    background: var(--background-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.facility-item:hover {
+    transform: translateX(5px);
+}
+
+.requirements-content {
+    line-height: 1.6;
+}
+
+.contact-details {
+    margin-top: 0.25rem;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 1rem;
+}
+
+.contact-details i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    vertical-align: middle;
+}
+
+.contact-details > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.1rem 0;
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 2px;
+    height: 100%;
+    background: var(--primary-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-badge {
+    position: absolute;
+    left: 30px;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content {
+    width: calc(100% - 60px);
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 60px;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h6 {
+    color: var(--on-surface-color);
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.timeline-content p {
+    color: var(--on-surface-color);
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+.timeline-content .text-muted {
+    font-size: 0.8rem;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--on-primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+    color: var(--on-primary-color);
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
+}
+
+.loading-spinner {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Additional Bootstrap enhancements */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
+    border-color: color-mix(in srgb, var(--primary-color), white 15%);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--secondary-color), white 15%);
+    border-color: color-mix(in srgb, var(--secondary-color), white 15%);
+}

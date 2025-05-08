@@ -14,3 +14,41 @@
         border-radius: 50px 0 0 50px !important;
     }
 }
+
+@media (max-width: 768px) {
+    .university-hero {
+        text-align: center;
+    }
+
+    .university-logo {
+        margin: 0 auto 1.5rem;
+    }
+
+    .contact-info {
+        justify-content: center;
+    }
+
+    .timeline::before {
+        left: 25px;
+    }
+
+    .timeline-item {
+        margin-bottom: 20px;
+    }
+
+    .timeline-badge {
+        left: 25px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .timeline-content {
+        width: calc(100% - 50px);
+        margin-left: 50px;
+    }
+
+    .program-grid,
+    .facility-grid {
+        grid-template-columns: 1fr;
+    }
+}
