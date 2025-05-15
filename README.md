@@ -99,20 +99,11 @@ CREATE TABLE admission_statistics (
 ## API Endpoints
 
 ### Universities
-- `GET /api/universities` - Get all universities
-- `GET /api/universities/public` - Get public universities
-- `GET /api/universities/private` - Get private universities
-- `GET /api/universities/search?q={query}` - Search universities
-- `GET /api/universities/{id}` - Get university by ID
-- `POST /api/universities` - Add new university
-- `PUT /api/universities/{id}` - Update university
-- `DELETE /api/universities/{id}` - Delete university
+- `GET /api/read.php` - Get all universities
+- `GET /api/read_one.php?name={university_name}` - Get university by name
+- `POST /api/upload.php` - Upload university information and images
 
-### Statistics
-- `GET /api/statistics/admission-rates` - Get admission rate trends
-- `GET /api/statistics/seat-distribution` - Get program-wise seat distribution
-- `GET /api/statistics/cutoff-marks` - Get cutoff marks data
-- `GET /api/statistics/test-stats` - Get admission test statistics
+Note: Additional endpoints for statistics and other features are planned for future implementation.
 
 ## Installation
 
