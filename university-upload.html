@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload University Details - Admission Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <style>
+        .timeline-event {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .remove-event {
+            color: #dc3545;
+            cursor: pointer;
+        }
+        .form-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="university-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Upload University Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <h1 class="mb-4">Upload University Details</h1>
+        
+        <form id="universityForm" class="needs-validation" novalidate>
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3 class="mb-3">Basic Information</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">University Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="type" class="form-label">University Type *</label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                            <option value="National">National</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="website" class="form-label">Website *</label>
+                        <input type="url" class="form-control" id="website" name="website" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="established_year" class="form-label">Established Year *</label>
+                        <input type="number" class="form-control" id="established_year" name="established_year" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="location" class="form-label">Location *</label>
+                        <input type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ranking" class="form-label">Ranking</label>
+                        <input type="number" class="form-control" id="ranking" name="ranking">
+                    </div>
+                    <div class="col-12">
+                        <label for="description" class="form-label">Description *</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+                <h3 class="mb-3">Additional Information</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="application_deadline" class="form-label">Application Deadline</label>
+                        <input type="date" class="form-control" id="application_deadline" name="application_deadline">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tuition_fee" class="form-label">Tuition Fee (BDT)</label>
+                        <input type="number" class="form-control" id="tuition_fee" name="tuition_fee">
+                    </div>
+                    <div class="col-12">
+                        <label for="admission_requirements" class="form-label">Admission Requirements</label>
+                        <textarea class="form-control" id="admission_requirements" name="admission_requirements" rows="3"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="contact_info" class="form-label">Contact Information</label>
+                        <textarea class="form-control" id="contact_info" name="contact_info" rows="3" placeholder="Phone: +880-XXX-XXXXXXX&#10;Email: example@university.edu&#10;Address: University Address"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="programs_offered" class="form-label">Programs Offered</label>
+                        <textarea class="form-control" id="programs_offered" name="programs_offered" rows="3" placeholder="Enter programs separated by commas"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="campus_facilities" class="form-label">Campus Facilities</label>
+                        <textarea class="form-control" id="campus_facilities" name="campus_facilities" rows="3" placeholder="Enter facilities separated by commas"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label for="image_url" class="form-label">University Logo URL</label>
+                        <input type="url" class="form-control" id="image_url" name="image_url">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Events -->
+            <div class="form-section">
+                <h3 class="mb-3">Application Timeline Events</h3>
+                <div id="timelineEvents">
+                    <!-- Timeline events will be added here -->
+                </div>
+                <button type="button" class="btn btn-secondary mt-3" id="addTimelineEvent">
+                    <i class="bi bi-plus-circle"></i> Add Timeline Event
+                </button>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Upload University Details</button>
+                <button type="reset" class="btn btn-secondary ms-2">Reset Form</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('universityForm');
+            const addTimelineEventBtn = document.getElementById('addTimelineEvent');
+            const timelineEventsContainer = document.getElementById('timelineEvents');
+
+            // Add timeline event
+            addTimelineEventBtn.addEventListener('click', function() {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'timeline-event';
+                eventDiv.innerHTML = `
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Event Title</label>
+                            <input type="text" class="form-control" name="timeline_events[][event_title]" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Event Date</label>
+                            <input type="date" class="form-control" name="timeline_events[][event_date]" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Event Type</label>
+                            <select class="form-select" name="timeline_events[][event_type]" required>
+                                <option value="">Select Type</option>
+                                <option value="Application">Application</option>
+                                <option value="Document">Document</option>
+                                <option value="Test">Test</option>
+                                <option value="Interview">Interview</option>
+                                <option value="Result">Result</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="button" class="btn btn-danger w-100 remove-event">
+                                <i class="bi bi-trash"></i> Remove
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Event Description</label>
+                            <textarea class="form-control" name="timeline_events[][event_description]" rows="2" required></textarea>
+                        </div>
+                    </div>
+                `;
+
+                timelineEventsContainer.appendChild(eventDiv);
+
+                // Add remove event listener
+                eventDiv.querySelector('.remove-event').addEventListener('click', function() {
+                    eventDiv.remove();
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                const formData = new FormData(form);
+                const data = {};
+
+                // Convert FormData to JSON object
+                for (let [key, value] of formData.entries()) {
+                    if (key.includes('timeline_events')) {
+                        if (!data.timeline_events) {
+                            data.timeline_events = [];
+                        }
+                        const index = parseInt(key.match(/\[(\d+)\]/)[1]);
+                        const field = key.match(/\[([^\]]+)\]$/)[1];
+                        if (!data.timeline_events[index]) {
+                            data.timeline_events[index] = {};
+                        }
+                        data.timeline_events[index][field] = value;
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                try {
+                    const response = await fetch('api/upload.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('University details uploaded successfully!');
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        timelineEventsContainer.innerHTML = '';
+                    } else {
+                        throw new Error(result.error || 'Failed to upload university details');
+                    }
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,72 @@
+{
+    "admissionRates": {
+        "2020": {
+            "public": 15,
+            "private": 25
+        },
+        "2021": {
+            "public": 18,
+            "private": 28
+        },
+        "2022": {
+            "public": 20,
+            "private": 30
+        },
+        "2023": {
+            "public": 22,
+            "private": 32
+        }
+    },
+    "seatDistribution": {
+        "Engineering": {
+            "total": 5000,
+            "percentage": 30
+        },
+        "Business": {
+            "total": 4000,
+            "percentage": 25
+        },
+        "Medical": {
+            "total": 3000,
+            "percentage": 20
+        },
+        "Arts": {
+            "total": 2000,
+            "percentage": 15
+        },
+        "Science": {
+            "total": 1500,
+            "percentage": 10
+        }
+    },
+    "cutoffMarks": {
+        "2023": {
+            "Engineering": 85,
+            "Business": 80,
+            "Medical": 90,
+            "Arts": 75,
+            "Science": 78
+        },
+        "2022": {
+            "Engineering": 83,
+            "Business": 78,
+            "Medical": 88,
+            "Arts": 73,
+            "Science": 76
+        }
+    },
+    "testStats": {
+        "2023": {
+            "applied": 1000,
+            "appeared": 800,
+            "passed": 400,
+            "selected": 200
+        },
+        "2022": {
+            "applied": 900,
+            "appeared": 750,
+            "passed": 380,
+            "selected": 190
+        }
+    }
+} 

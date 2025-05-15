@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Statistics - Admission Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/media.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <main class="bg-light">
+        <!-- Back Button -->
+        <div class="position-fixed top-0 start-0 p-3" style="z-index: 1030;">
+            <button onclick="history.back()" class="btn btn-light rounded-circle shadow-sm">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+        </div>
+
+        <!-- Redesigned Header Section -->
+        <div class="header-section text-center">
+            <!-- Logo and Title -->
+            <div class="logo-container p-5">
+                <img src="./assets/logo.png" alt="Admission Bank Logo" class="logo mb-2">
+                <h1 class="display-4 fw-bold">Admission Bank</h1>
+                <p class="lead text-muted">Your guide to university admissions in Bangladesh</p>
+            </div>
+        </div>
+
+        <!-- Sticky Statistics Title -->
+        <div class="statistics-title-banner bg-dark text-white p-4 text-center sticky-top">
+            <h2 class="mb-0 text-white">Admission Statistics & Analytics</h2>
+        </div>
+
+        <div class="container py-5">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-body">
+                            <h3 class="card-title h5 mb-4">Admission Rate Trends</h3>
+                            <canvas id="admissionRateChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-body">
+                            <h3 class="card-title h5 mb-4">Program-wise Seat Distribution</h3>
+                            <canvas id="seatDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-body">
+                            <h3 class="card-title h5 mb-4">Previous Year Cutoff Marks</h3>
+                            <canvas id="cutoffMarksChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-body">
+                            <h3 class="card-title h5 mb-4">Admission Test Statistics</h3>
+                            <canvas id="testStatsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <select id="universityFilter" class="form-select">
+                        <option value="all">All Universities</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <select id="yearFilter" class="form-select">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <select id="programFilter" class="form-select">
+                        <option value="all">All Programs</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light py-3 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Admission Bank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Back to top">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"></script>
+    <script src="js/statistics.js"></script>
+</body>
+</html> 
