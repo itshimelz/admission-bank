@@ -5,15 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownItems = document.querySelectorAll('.dropdown-item[data-type]');
     const dropdownToggle = document.getElementById('universityTypeDropdown');
     const resourceGrid = document.getElementById('resourceGrid');
+    
+    console.log('Resource Grid:', resourceGrid);
+    
     let allUnis = [];
+    let filteredUnis = [];
     let currentType = 'All';
+    let currentPage = 1;
+    const universitiesPerPage = 6;
 
     // Load JSON data for main page
+    console.log('Starting to load JSON data...');
     Promise.all([
         fetch('./data/public_universities.json').then(res => res.json()),
         fetch('./data/private_universities.json').then(res => res.json())
     ])
     .then(([publicData, privateData]) => {
+        console.log('JSON data loaded successfully');
         const pub = publicData.map(u => ({ 
             name: u.name, 
             website: u.website || '', 
@@ -27,82 +35,98 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'shield' 
         }));
         allUnis = [...pub, ...priv];
+        filteredUnis = [...allUnis];
         console.log(`Loaded universities: ${allUnis.length}`, allUnis);
-        renderGrid(allUnis);
+        
+        // Initial render
+        renderPage();
+        // Initialize other features
         populateTicker();
     })
     .catch(err => {
+        console.error('Error loading JSON data:', err);
         resourceGrid.innerHTML = '<p class="text-danger text-center">Failed to load data.</p>';
-        console.error(err);
     });
 
-    function renderGrid(list) {
-        const resourceGrid = document.getElementById('resourceGrid');
-        resourceGrid.innerHTML = '';
-        if (list.length === 0) {
-            resourceGrid.innerHTML = '<p class="text-center">No results found.</p>';
+    function renderPage() {
+        console.log('Rendering page...');
+        if (!resourceGrid) {
+            console.error('Resource grid not found!');
             return;
         }
-        list.forEach(u => {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4 mb-4';
-    
-            const card = document.createElement('div');
-            card.className = 'card h-100 shadow-sm';
-            card.style.backgroundColor = 'var(--surface-color)';
-            card.style.color = 'var(--on-surface-color)';
-    
-            const cardBody = document.createElement('div');
-            cardBody.className = 'card-body text-center';
-    
-            const icon = document.createElement('i');
-            icon.className = `bi bi-${u.icon} fs-1 mb-2`;
-            icon.style.color = 'var(--primary-color)';
-    
-            const title = document.createElement('h5');
-            title.className = 'card-title';
-            title.style.color = 'var(--secondary-color)';
-            title.textContent = u.name;
-    
-            const details = document.createElement('p');
-            details.className = 'card-text';
-            details.style.color = 'var(--on-background-color)';
-            details.textContent = `${u.website} - ${u.type}`;
-    
-            const link = document.createElement('a');
-            link.href = `university.html?name=${encodeURIComponent(u.name)}`;
-            link.className = 'stretched-link';
-    
-            cardBody.appendChild(icon);
-            cardBody.appendChild(title);
-            cardBody.appendChild(details);
-    
-            card.appendChild(cardBody);
-            card.appendChild(link);
-            col.appendChild(card);
-            resourceGrid.appendChild(col);
-        });
+
+        // Get current universities to display from filtered list
+        const startIndex = 0;
+        const endIndex = currentPage * universitiesPerPage;
+        const currentUnis = filteredUnis.slice(startIndex, endIndex);
+        
+        console.log(`Showing ${currentUnis.length} universities`);
+        
+        // Create HTML for universities
+        const universitiesHTML = currentUnis.map(u => `
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm" style="background-color: var(--surface-color); color: var(--on-surface-color);">
+                    <div class="card-body text-center">
+                        <i class="bi bi-${u.icon} fs-1 mb-2" style="color: var(--primary-color);"></i>
+                        <h5 class="card-title" style="color: var(--secondary-color);">${u.name}</h5>
+                        <p class="card-text" style="color: var(--on-background-color);">${u.website} - ${u.type}</p>
+                        <a href="university.html?name=${encodeURIComponent(u.name)}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Create HTML for show more button if needed
+        const remainingCount = filteredUnis.length - endIndex;
+        console.log(`Remaining universities: ${remainingCount}`);
+        
+        const showMoreHTML = remainingCount > 0 ? `
+            <div class="col-12 text-center mt-4">
+                <button class="btn btn-primary" onclick="window.showMore()">
+                    Show More (${remainingCount} remaining)
+                </button>
+            </div>
+        ` : '';
+
+        // Update the grid
+        resourceGrid.innerHTML = universitiesHTML + showMoreHTML;
+        console.log('Page rendered successfully');
     }
+
+    // Make showMore function available globally
+    window.showMore = function() {
+        console.log('Show more clicked');
+        currentPage++;
+        renderPage();
+    };
 
     function applyFilters() {
         const term = (searchInput?.value || '').trim().toLowerCase();
-        console.log('applyFilters:', { type: currentType, term, totalUnis: allUnis.length });
-        let filtered = allUnis;
-        if (currentType !== 'All') {
-            filtered = filtered.filter(u => u.type === currentType);
-        }
-        if (term) {
-            filtered = filtered.filter(u =>
-                (u.name || '').toLowerCase().includes(term) ||
-                (u.website || '').toLowerCase().includes(term)
-            );
-        }
-        renderGrid(filtered);
+        console.log('Applying filters:', { type: currentType, term, totalUnis: allUnis.length });
+        
+        // Reset to first page when filtering
+        currentPage = 1;
+        
+        // Apply filters
+        filteredUnis = allUnis.filter(u => {
+            const matchesType = currentType === 'All' || u.type === currentType;
+            const matchesSearch = !term || 
+                u.name.toLowerCase().includes(term) || 
+                u.website.toLowerCase().includes(term);
+            return matchesType && matchesSearch;
+        });
+        
+        console.log(`Filtered universities: ${filteredUnis.length}`);
+        renderPage();
     }
 
     function populateTicker() {
+        console.log('Populating ticker...');
         const ticker = document.querySelector('.ticker');
-        if (!ticker) return;
+        if (!ticker) {
+            console.log('Ticker element not found');
+            return;
+        }
         ticker.innerHTML = '';
         const inner = document.createElement('div');
         inner.className = 'ticker-inner';
@@ -116,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ticker.appendChild(inner);
         const countEl = document.getElementById('admission-count');
         if (countEl) countEl.textContent = inner.children.length;
+        console.log('Ticker populated successfully');
     }
 
     dropdownToggle.textContent = 'All Universities';
@@ -136,13 +161,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') applyFilters();
     });
 
-    // Back to top button logic
-    const backBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) backBtn.classList.add('show');
-        else backBtn.classList.remove('show');
-    });
-    backBtn.addEventListener('click', () => {
+    // Function to scroll to news section
+    function scrollToNewsSection() {
+        const newsSection = document.querySelector('.news-updates-section');
+        if (newsSection) {
+            newsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Function to scroll to top
+    function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show/hide back to top button based on scroll position
+    window.addEventListener('scroll', () => {
+        const backToTopBtn = document.querySelector('.back-to-top');
+        if (window.scrollY > 200) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
     });
 });

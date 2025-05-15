@@ -7,8 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/media.css" />
+    <link rel="stylesheet" href="./css/news-updates.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/png" href="./assets/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/floating-buttons.css">
     <title>Admission Bank</title>
 </head>
 
@@ -73,11 +76,25 @@
             </div>
 
             <!-- Resource Grid -->
-            <div id="resourceGrid" class="row justify-content-center container"></div>
+            <div class="row justify-content-center">
+                <div id="resourceGrid" class="row justify-content-center container"></div>
+                <div id="showMoreContainer" class="text-center mt-4"></div>
+            </div>
         </div>
-        </div>
-    </main>
 
+        <!-- News and Updates Section -->
+        <section class="news-updates-section">
+            <div class="container">
+                <div class="news-updates-header">
+                    <h2>News & Updates</h2>
+                    <p>Stay informed about the latest admission notices, policy changes, and announcements</p>
+                </div>
+                <div id="newsContainer" class="row">
+                    <!-- News cards will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="bg-light py-3 mt-5">
         <div class="container text-center">
@@ -85,12 +102,21 @@
         </div>
     </footer>
 
+    <!-- Floating News Button -->
+    <button class="floating-news-btn">
+        <i class="bi bi-newspaper"></i> Latest News
+    </button>
+
     <!-- Back to Top Button -->
-    <button id="backToTopBtn" class="back-to-top" aria-label="Back to top">↑</button>
+    <button class="back-to-top">
+        <i class="bi bi-arrow-up"></i> Back to Top
+    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"></script>
-    <script src="./js/script.js" defer></script>
+    <script src="./js/news-updates.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/floating-buttons.js"></script>
 </body>
 
 </html>
