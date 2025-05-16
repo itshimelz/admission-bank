@@ -22,16 +22,34 @@ CREATE TABLE IF NOT EXISTS universities (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS application_timeline (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  university_id int(11) NOT NULL,
+  event_name varchar(255) NOT NULL,
+  event_description text,
+  event_date date NOT NULL,
+  event_type varchar(50) NOT NULL,
+  status varchar(20) NOT NULL DEFAULT 'active',
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY `university_id` (`university_id`),
+  CONSTRAINT `fk_timeline_university` FOREIGN KEY (`university_id`) REFERENCES `universities` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Create admins table
+CREATE TABLE IF NOT EXISTS admins (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    university_id INT NOT NULL,
-    event_title VARCHAR(255) NOT NULL,
-    event_date DATE NOT NULL,
-    event_description TEXT,
-    event_type ENUM('Application', 'Document', 'Test', 'Interview', 'Result', 'Other') NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (university_id) REFERENCES universities(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    last_login TIMESTAMP NULL,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- Insert default admin user (password: Admin@123)
+INSERT INTO admins (username, password, email) VALUES 
+('admin', 'Admin@123', 'admin@admissionbank.com');
 
 -- Insert sample data for 3 prominent Bangladeshi universities
 INSERT INTO universities (name, type, website, established_year, location, description, admission_requirements, application_deadline, tuition_fee, contact_info, programs_offered, campus_facilities, ranking, image_url) VALUES
@@ -85,7 +103,7 @@ INSERT INTO universities (name, type, website, established_year, location, descr
 );
 
 -- Add sample timeline data for University of Dhaka
-INSERT INTO application_timeline (university_id, event_title, event_date, event_description, event_type) VALUES
+INSERT INTO application_timeline (university_id, event_name, event_date, event_description, event_type) VALUES
 (1, 'Application Form Available', '2024-05-01', 'Online application forms will be available on the university website', 'Application'),
 (1, 'Application Deadline', '2024-07-15', 'Last date to submit completed application forms', 'Application'),
 (1, 'Document Submission', '2024-07-20', 'Submit all required documents to the admission office', 'Document'),
@@ -94,7 +112,7 @@ INSERT INTO application_timeline (university_id, event_title, event_date, event_
 (1, 'Result Publication', '2024-08-30', 'Final admission results will be published', 'Result');
 
 -- Add sample timeline data for North South University
-INSERT INTO application_timeline (university_id, event_title, event_date, event_description, event_type) VALUES
+INSERT INTO application_timeline (university_id, event_name, event_date, event_description, event_type) VALUES
 (2, 'Application Form Available', '2024-04-01', 'Online application forms will be available on the university website', 'Application'),
 (2, 'Application Deadline', '2024-06-30', 'Last date to submit completed application forms', 'Application'),
 (2, 'Document Submission', '2024-07-05', 'Submit all required documents to the admission office', 'Document'),
@@ -127,7 +145,7 @@ VALUES
 ('Bangabandhu Sheikh Mujib Medical University', 'Public', 'https://www.bsmmu.ac.bd', 1998, 'Dhaka', 'The premier postgraduate medical institution in Bangladesh.', 'MBBS, Internship, Admission test required', '2024-08-15', 6000.00, 'Phone: +880-2-55165088\nEmail: info@bsmmu.edu.bd\nAddress: Shahbag, Dhaka-1000, Bangladesh', 'Medical Sciences, Postgraduate Medicine, Surgery, Dentistry', 'Hospital, Library, Research Labs, Medical Center', 13, 'https://upload.wikimedia.org/wikipedia/en/7/7e/Bangabandhu_Sheikh_Mujib_Medical_University_logo.png');
 
 -- Add sample timeline data for University of Rajshahi (ID 7)
-INSERT INTO application_timeline (university_id, event_title, event_date, event_description, event_type) VALUES
+INSERT INTO application_timeline (university_id, event_name, event_date, event_description, event_type) VALUES
 (7, 'Admission Notice Publication', '2025-01-26', 'Official admission notice for the 2024-2025 academic year is published.', 'Announcement'),
 (7, 'Primary Application Begins', '2025-01-27', 'Online primary application submission starts.', 'Application'),
 (7, 'Primary Application Ends', '2025-02-05', 'Deadline for submitting the primary application.', 'Application'),
@@ -146,3 +164,23 @@ INSERT INTO application_timeline (university_id, event_title, event_date, event_
 (7, 'B Unit Result Publication', '2025-04-17', 'Admission test results for B Unit will be published.', 'Result'),
 (7, 'A Unit Result Publication', '2025-04-25', 'Admission test results for A Unit will be published.', 'Result'),
 (7, 'C Unit Result Publication', '2025-05-03', 'Admission test results for C Unit will be published.', 'Result');
+
+-- Create news and updates table
+CREATE TABLE IF NOT EXISTS news_updates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    category ENUM('Admission Notice', 'Policy Change', 'Announcement', 'Event') NOT NULL,
+    university_id INT,
+    publish_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (university_id) REFERENCES universities(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert sample news and updates
+INSERT INTO news_updates (title, content, category, university_id) VALUES
+('DU Admission Test Date Announced', 'The University of Dhaka has announced the admission test date for the 2024-2025 academic year. The test will be held on August 15, 2024.', 'Admission Notice', 1),
+('New Scholarship Program at NSU', 'North South University introduces a new merit-based scholarship program for outstanding students. Applications open from June 1, 2024.', 'Policy Change', 2),
+('BUET Admission Requirements Updated', 'Bangladesh University of Engineering & Technology has updated its admission requirements for the upcoming academic year.', 'Policy Change', 3),
+('National University Admission Circular', 'National University has published the admission circular for the 2024-2025 academic year. Application deadline is July 30, 2024.', 'Admission Notice', 11),
+('Admission Bank Mobile App Launch', 'We are excited to announce the launch of our mobile app for easier access to university admission information.', 'Announcement', NULL);

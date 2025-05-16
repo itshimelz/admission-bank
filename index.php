@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +28,17 @@
                     alt="MyWiki Logo" class="logo mb-2">
                 <h1 class="display-4 fw-bold ">Admission Bank</h1>
                 <p class="lead text-muted">Your guide to university admissions in Bangladesh</p>
+                
+                <!-- Admin Navigation -->
+                <?php if(isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
+                <div class="admin-nav mt-3">
+                    <div class="btn-group">
+                        <a href="/admission-bank/api/university_upload.php" class="btn btn-primary">
+                            <i class="bi bi-cloud-upload me-2"></i>Upload University
+                        </a>  
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
 

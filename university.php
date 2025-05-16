@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +19,17 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html" class="text-white">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php" class="text-white">Home</a></li>
           <li class="breadcrumb-item active text-white" aria-current="page" id="universityName">University Details</li>
         </ol>
       </nav>
+      <?php if(isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
+      <div class="text-end mt-2">
+        <a href="#" class="btn btn-outline-light" id="timelineManagementBtn">
+          <i class="bi bi-calendar-event me-2"></i>Manage Timeline Events
+        </a>
+      </div>
+      <?php endif; ?>
     </div>
   </div>
 

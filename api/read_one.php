@@ -25,6 +25,7 @@ try {
     
     include_once 'config/database.php';
     include_once 'models/University.php';
+    require_once 'helpers/Response.php';
 
     $database = new Database();
     $db = $database->getConnection();
@@ -48,7 +49,7 @@ try {
         while ($event = $timeline_stmt->fetch(PDO::FETCH_ASSOC)) {
             array_push($timeline_events, array(
                 "id" => $event['id'],
-                "event_title" => $event['event_title'],
+                "event_name" => $event['event_name'],
                 "event_date" => $event['event_date'],
                 "event_description" => $event['event_description'],
                 "event_type" => $event['event_type']
@@ -74,14 +75,14 @@ try {
             "timeline_events" => $timeline_events
         );
 
-        sendJsonResponse($university_arr);
+        Response::success($university_arr, 'University details fetched successfully');
     } else {
-        sendJsonResponse(array("message" => "University not found."), 404);
+        Response::error('University not found.', 404);
     }
 } catch (Exception $e) {
-    sendJsonResponse(array("message" => "Error: " . $e->getMessage()), 500);
+    Response::error('Error: ' . $e->getMessage(), 500);
 } catch (Error $e) {
-    sendJsonResponse(array("message" => "Error: " . $e->getMessage()), 500);
+    Response::error('Error: ' . $e->getMessage(), 500);
 } finally {
     // Clean and end output buffer
     ob_end_flush();

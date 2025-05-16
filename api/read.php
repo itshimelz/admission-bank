@@ -4,6 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include_once 'config/database.php';
 include_once 'models/University.php';
+require_once 'helpers/Response.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -41,10 +42,8 @@ if($num > 0) {
         array_push($universities_arr["records"], $university_item);
     }
 
-    http_response_code(200);
-    echo json_encode($universities_arr);
+    Response::success($universities_arr["records"], 'Universities fetched successfully');
 } else {
-    http_response_code(404);
-    echo json_encode(array("message" => "No universities found."));
+    Response::error('No universities found.', 404);
 }
 ?> 

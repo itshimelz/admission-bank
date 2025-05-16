@@ -12,41 +12,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let filteredUnis = [];
     let currentType = 'All';
     let currentPage = 1;
-    const universitiesPerPage = 6;
+    const universitiesPerPage = 12;
 
-    // Load JSON data for main page
-    console.log('Starting to load JSON data...');
-    Promise.all([
-        fetch('./data/public_universities.json').then(res => res.json()),
-        fetch('./data/private_universities.json').then(res => res.json())
-    ])
-    .then(([publicData, privateData]) => {
-        console.log('JSON data loaded successfully');
-        const pub = publicData.map(u => ({ 
-            name: u.name, 
-            website: u.website || '', 
-            type: 'Public', 
-            icon: 'building' 
-        }));
-        const priv = privateData.map(u => ({ 
-            name: u.name, 
-            website: u.website || '', 
-            type: 'Private', 
-            icon: 'shield' 
-        }));
-        allUnis = [...pub, ...priv];
-        filteredUnis = [...allUnis];
-        console.log(`Loaded universities: ${allUnis.length}`, allUnis);
-        
-        // Initial render
-        renderPage();
-        // Initialize other features
-        populateTicker();
-    })
-    .catch(err => {
-        console.error('Error loading JSON data:', err);
-        resourceGrid.innerHTML = '<p class="text-danger text-center">Failed to load data.</p>';
-    });
+    // Load data from API
+    console.log('Starting to load data from API...');
+    fetch('api/read.php')
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                console.log('API data loaded successfully');
+                allUnis = result.data.map(u => ({ 
+                    name: u.name, 
+                    website: u.website || '', 
+                    type: u.type, 
+                    icon: u.type === 'Public' ? 'building' : 'shield' 
+                }));
+                filteredUnis = [...allUnis];
+                console.log(`Loaded universities: ${allUnis.length}`, allUnis);
+                
+                // Initial render
+                renderPage();
+                // Initialize other features
+                populateTicker();
+            } else {
+                throw new Error(result.message || 'Failed to load data');
+            }
+        })
+        .catch(err => {
+            console.error('Error loading data:', err);
+            resourceGrid.innerHTML = '<p class="text-danger text-center">Failed to load data.</p>';
+        });
 
     function renderPage() {
         console.log('Rendering page...');
@@ -70,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <i class="bi bi-${u.icon} fs-1 mb-2" style="color: var(--primary-color);"></i>
                         <h5 class="card-title" style="color: var(--secondary-color);">${u.name}</h5>
                         <p class="card-text" style="color: var(--on-background-color);">${u.website} - ${u.type}</p>
-                        <a href="university.html?name=${encodeURIComponent(u.name)}" class="stretched-link"></a>
+                        <a href="university.php?name=${encodeURIComponent(u.name)}" class="stretched-link"></a>
                     </div>
                 </div>
             </div>

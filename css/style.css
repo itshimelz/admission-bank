@@ -196,20 +196,28 @@ label {
     padding: 0.5rem 0;
     background-color: var(--surface-color);
 }
+
 .ticker-inner {
     display: inline-block;
     /* slower scroll animation */
     animation: scroll-left 40s linear infinite;
 }
+
 .ticker-item {
     display: inline-block;
     margin: 0 2rem;
     font-size: 1rem;
     color: var(--secondary-color);
 }
+
 @keyframes scroll-left {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 /* Sticky University Category Banner */
@@ -220,25 +228,105 @@ label {
     background-color: var(--surface-color);
 }
 
-/* Back to Top Button */
+.floating-news-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--primary-color);
+    color: white;
+}
+
 .back-to-top {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--primary-color);
-    color: var(--on-primary-color);
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: 50px;
     border: none;
-    border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    transition: opacity 0.3s ease;
-}
-.back-to-top.show {
+    font-weight: 500;
     display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-color);
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.floating-news-btn:hover,
+.back-to-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.floating-news-btn i,
+.back-to-top i {
+    font-size: 1.2em;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Show More Button */
+#showMoreContainer {
+    margin: 2rem 0;
+}
+
+#showMoreContainer .btn {
+    padding: 10px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+#showMoreContainer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }

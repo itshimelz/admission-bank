@@ -1,0 +1,112 @@
+.news-updates-section {
+    padding: 2rem 0;
+    background-color: #f8f9fa;
+}
+
+.news-updates-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.news-updates-header h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.news-updates-header p {
+    color: #6c757d;
+}
+
+.news-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card .card-body {
+    padding: 1.5rem;
+}
+
+.news-card .category-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.news-card .category-badge.admission-notice {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.news-card .category-badge.policy-change {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.news-card .category-badge.announcement {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.news-card .category-badge.event {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.news-card h3 {
+    color: #2c3e50;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.news-card p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.news-card .university-name {
+    color: #495057;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.news-card .publish-date {
+    color: #adb5bd;
+    font-size: 0.875rem;
+}
+
+.news-card .read-more {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.news-card .read-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .news-updates-section {
+        padding: 1rem 0;
+    }
+    
+    .news-card {
+        margin-bottom: 1rem;
+    }
+    
+    .news-card .card-body {
+        padding: 1rem;
+    }
+} 

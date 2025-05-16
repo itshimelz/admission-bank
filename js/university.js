@@ -9,19 +9,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const response = await fetch(`api/read_one.php?name=${encodeURIComponent(universityName)}`);
-    const contentType = response.headers.get('content-type');
+    const result = await response.json();
     
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Server returned non-JSON response');
+    if (!response.ok) {
+      throw new Error(result.message || 'University not found');
     }
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'University not found');
+    if (result.success) {
+      displayUniversityDetails(result.data);
+      
+      // Update timeline management button with university ID
+      const timelineBtn = document.getElementById('timelineManagementBtn');
+      if (timelineBtn) {
+        timelineBtn.href = `/admission-bank/timeline-management.php?university_id=${result.data.id}`;
+      }
+    } else {
+      throw new Error(result.message || 'Failed to load university details');
     }
-    
-    const university = await response.json();
-    displayUniversityDetails(university);
   } catch (error) {
     console.error('Error:', error);
     showError(error.message || 'Failed to load university details');
@@ -203,7 +207,7 @@ function displayTimelineEvents(events) {
               </div>
               <div class="timeline-content">
                 <div class="timeline-header">
-                  <h6 class="mb-1">${event.event_title}</h6>
+                  <h6 class="mb-1">${event.event_name}</h6>
                   <span class="badge bg-${getEventColor(event.event_type)}">${event.event_type}</span>
                 </div>
                 <p class="text-muted mb-1">
@@ -214,7 +218,7 @@ function displayTimelineEvents(events) {
                     day: 'numeric' 
                   })}
                 </p>
-                <p class="mb-0">${event.event_description}</p>
+                ${event.event_description ? `<p class="mb-0 text-muted">${event.event_description}</p>` : ''}
               </div>
             </div>
           `).join('')}
