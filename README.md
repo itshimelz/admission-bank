@@ -1,6 +1,6 @@
 # Admission Bank
 
-A comprehensive web application for exploring university admissions in Bangladesh, featuring detailed statistics, analytics, and university information management.
+A comprehensive web application for exploring university admissions in Bangladesh, featuring detailed statistics, analytics, and university information management. Now with enhanced features including admin dashboard, timeline management, and improved data handling.
 
 ## Features
 
@@ -13,6 +13,9 @@ A comprehensive web application for exploring university admissions in Banglades
 - RESTful API endpoints for university data
 - Responsive design for all devices
 - Real-time search and filtering
+- Secure admin authentication system
+- Timeline management for admission events
+- News and updates section
 
 ### Statistics & Analytics
 - Admission rate trends visualization
@@ -27,28 +30,40 @@ A comprehensive web application for exploring university admissions in Banglades
 - Data validation and verification
 - Image upload support
 - Admin dashboard for content management
+- Timeline event management
+- News and announcements system
+- Secure file handling
+- Bulk university import functionality
 
 ## Project Structure
 
 ```
 admission-bank/
-├── api/                # API endpoints and backend logic
-│   ├── upload.php     # File upload handling
-│   └── universities/  # University data endpoints
-├── assets/            # Static assets
-│   └── logo.png       # Site logo and favicon
-├── css/               # Stylesheets
-│   ├── style.css      # Main styles
-│   ├── media.css      # Responsive styles
-│   └── statistics.css # Statistics page styles
-├── data/              # Data files
-│   ├── public_universities.json
-│   ├── private_universities.json
-│   └── statistics.json
-├── js/                # JavaScript files
-│   ├── script.js      # Main scripts
-│   └── statistics.js  # Statistics page scripts
-└── index.html         # Main entry point
+├── api/                    # API endpoints and backend logic
+│   ├── admin-login.php     # Admin authentication
+│   ├── check-auth.php      # Session verification
+│   ├── get-news.php        # News API endpoint
+│   ├── helpers/            # Helper classes
+│   │   └── Response.php    # Standardized API responses
+│   ├── import_universities.php # Bulk import
+│   ├── models/             # Data models
+│   │   └── TimelineEvent.php
+│   ├── sql/                # Database scripts
+│   ├── timeline_events.php # Timeline management
+│   └── university_upload.php # University data handling
+├── css/                   # Stylesheets
+│   ├── style.css          # Main styles
+│   ├── news-updates.css   # News section styles
+│   └── media.css          # Responsive styles
+├── js/                    # JavaScript files
+│   ├── script.js          # Main scripts
+│   ├── university.js      # University page logic
+│   ├── timeline.js        # Timeline display
+│   ├── news-updates.js    # News section logic
+│   └── timeline-management.js # Admin timeline controls
+├── admin-login.html       # Admin login page
+├── timeline-management.php # Timeline admin interface
+└── index.php              # Main entry point
 ```
 
 ## Database Integration
@@ -102,8 +117,17 @@ CREATE TABLE admission_statistics (
 - `GET /api/read.php` - Get all universities
 - `GET /api/read_one.php?name={university_name}` - Get university by name
 - `POST /api/upload.php` - Upload university information and images
+- `POST /api/university_upload.php` - Handle university data uploads
+- `POST /api/import_universities.php` - Bulk import universities
 
-Note: Additional endpoints for statistics and other features are planned for future implementation.
+### Authentication
+- `POST /api/admin-login.php` - Admin login
+- `GET /api/check-auth.php` - Verify admin session
+
+### Timeline & News
+- `GET /api/timeline_events.php` - Get all timeline events
+- `POST /api/timeline_events.php` - Create/update timeline events
+- `GET /api/get-news.php` - Get latest news and updates
 
 ## Installation
 
@@ -139,20 +163,40 @@ Note: Additional endpoints for statistics and other features are planned for fut
 ## Development
 
 ### Prerequisites
-- PHP 7.4 or higher
-- MySQL 5.7 or higher
-- Modern web browser
-- Node.js and npm (for frontend development)
+- PHP 8.0 or higher
+- MySQL 5.7 or higher / MariaDB 10.3+
+- Modern web browser (Chrome, Firefox, Edge, Safari)
+- Node.js 16+ and npm 8+
+- Composer 2.0+
 
 ### Running Locally
-1. Start your local server (e.g., XAMPP, WAMP)
+1. Start your local development server (XAMPP, WAMP, or `php -S`)
 2. Navigate to `http://localhost/admission-bank`
-3. For development, enable error reporting in PHP
+3. Development settings:
+   - Enable error reporting in PHP
+   - Set `APP_ENV=development` in `.env`
+   - Enable debug mode for detailed error messages
 
-### Code Style
-- Follow PSR-12 for PHP code
-- Use ESLint for JavaScript
-- Follow BEM methodology for CSS
+### Development Workflow
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes
+3. Run tests (if available)
+4. Commit with descriptive messages
+5. Push to your fork and create a pull request
+
+### Code Style & Standards
+- PHP: Follow PSR-12 and PSR-4 autoloading
+- JavaScript: Use ES6+ syntax, ESLint with recommended rules
+- CSS: BEM methodology with SCSS
+- Database: Use migrations for schema changes
+- Security: Always validate and sanitize user input
+- Performance: Optimize database queries and use caching where appropriate
+
+### Testing
+- Write unit tests for new features
+- Test across different browsers and devices
+- Verify form validations and error handling
+- Test with different user roles (admin/guest)
 
 ## Contributing
 
