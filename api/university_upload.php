@@ -3,6 +3,7 @@ require_once 'check-auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@ require_once 'check-auth.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
     <link rel="stylesheet" href="./css/media.css">
     <style>
         .university-header {
@@ -20,30 +22,35 @@ require_once 'check-auth.php';
             padding: 4rem 0;
             margin-bottom: 2rem;
         }
+
         .timeline-event {
             border: 1px solid #dee2e6;
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 5px;
             background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+
         .remove-event {
             color: #dc3545;
             cursor: pointer;
             transition: color 0.3s ease;
         }
+
         .remove-event:hover {
             color: #bb2d3b;
         }
+
         .form-section {
             background: #fff;
             padding: 25px;
             border-radius: 8px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             border: 1px solid #dee2e6;
         }
+
         .form-section h3 {
             color: #2c3e50;
             font-weight: 600;
@@ -51,40 +58,50 @@ require_once 'check-auth.php';
             padding-bottom: 10px;
             border-bottom: 2px solid #e9ecef;
         }
+
         .form-label {
             font-weight: 500;
             color: #495057;
         }
+
         .required-field::after {
             content: " *";
             color: #dc3545;
         }
+
         .btn-primary {
             background-color: #2c3e50;
             border-color: #2c3e50;
         }
+
         .btn-primary:hover {
             background-color: #1a252f;
             border-color: #1a252f;
         }
+
         .btn-secondary {
             background-color: #6c757d;
             border-color: #6c757d;
         }
+
         .btn-secondary:hover {
             background-color: #5a6268;
             border-color: #545b62;
         }
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: #2c3e50;
             box-shadow: 0 0 0 0.25rem rgba(44, 62, 80, 0.25);
         }
+
         .alert {
             display: none;
             margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
     <!-- University Header -->
     <div class="university-header">
@@ -124,7 +141,7 @@ require_once 'check-auth.php';
                 <div class="alert alert-danger" role="alert" id="errorAlert">
                     Error uploading university details. Please try again.
                 </div>
-                
+
                 <form id="universityForm" class="needs-validation" novalidate>
                     <!-- Basic Information -->
                     <div class="form-section">
@@ -353,7 +370,7 @@ require_once 'check-auth.php';
                         form.reset();
                         form.classList.remove('was-validated');
                         timelineEventsContainer.innerHTML = '';
-                        
+
                         // Hide success message after 5 seconds
                         setTimeout(() => {
                             successAlert.style.display = 'none';
@@ -371,4 +388,5 @@ require_once 'check-auth.php';
         });
     </script>
 </body>
-</html> 
+
+</html>

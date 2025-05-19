@@ -1,8 +1,9 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,11 @@ session_start();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./assets/logo.png">
   <link rel="stylesheet" href="./css/media.css">
   <link rel="stylesheet" href="./css/university.css">
 </head>
+
 <body>
   <div class="university-header">
     <div class="container">
@@ -23,12 +26,12 @@ session_start();
           <li class="breadcrumb-item active text-white" aria-current="page" id="universityName">University Details</li>
         </ol>
       </nav>
-      <?php if(isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
-      <div class="text-end mt-2">
-        <a href="#" class="btn btn-outline-light" id="timelineManagementBtn">
-          <i class="bi bi-calendar-event me-2"></i>Manage Timeline Events
-        </a>
-      </div>
+      <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
+        <div class="text-end mt-2">
+          <a href="#" class="btn btn-outline-light" id="timelineManagementBtn">
+            <i class="bi bi-calendar-event me-2"></i>Manage Timeline Events
+          </a>
+        </div>
       <?php endif; ?>
     </div>
   </div>
@@ -50,4 +53,5 @@ session_start();
 
   <script src="./js/university.js"></script>
 </body>
+
 </html>

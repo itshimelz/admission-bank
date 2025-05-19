@@ -11,6 +11,7 @@ $university_id = $_GET['university_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@ $university_id = $_GET['university_id'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
     <link rel="stylesheet" href="./css/media.css">
 
     <style>
@@ -31,6 +33,7 @@ $university_id = $_GET['university_id'];
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <div class="university-header">
@@ -147,4 +150,5 @@ $university_id = $_GET['university_id'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/timeline-management.js"></script>
 </body>
-</html> 
+
+</html>
